@@ -1,29 +1,80 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      right
+    >
+      <v-list dense>
+        <v-list-item @click="mvAttendance">
+          <v-list-item-action>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>きんたい</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="mvMemo">
+          <v-list-item-action>
+            <v-icon>mdi-file-document</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>メモ</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-Attendance v-if="this.attendance"></v-Attendance>
+    <v-Memo v-if="this.memo"></v-Memo>
+
+    <v-app-bar
+      app
+      color="cyan"
+      dark
+    >
+      <v-spacer></v-spacer>
+      <v-toolbar-title>Application</v-toolbar-title>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    </v-app-bar>
+
+    <v-footer
+      color="cyan"
+      app
+    >
+      <v-spacer></v-spacer>
+      <span class="white--text">&copy; 2019</span>
+    </v-footer>
+  </v-app>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import HelloWorld from './components/HelloWorld.vue'
-
-@Component({
+<script>
+import Attendance from './components/Attendance.vue'
+import Memo from './components/Memo.vue'
+export default {
   components: {
-    HelloWorld
+    'v-Attendance': Attendance,
+    'v-Memo': Memo
+  },
+  props: {
+    source: String
+  },
+  data () {
+    return {
+      drawer: null,
+      attendance: true,
+      memo: false
+    }
+  },
+  methods: {
+    mvAttendance: function () {
+      this.memo = false
+      this.attendance = true
+    },
+    mvMemo: function () {
+      this.attendance = false
+      this.memo = true
+    }
   }
-})
-export default class App extends Vue {}
-</script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
-</style>
+</script>
