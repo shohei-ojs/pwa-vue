@@ -2,9 +2,17 @@
   <v-sheet height="500">
     <v-calendar
       type="month"
-      now="2019-01-08"
-      value="2019-01-08"
-      :events="events"
+      :now="today"
     ></v-calendar>
   </v-sheet>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      today: new Date().toISOString().substr(0, 10).toString()
+    }
+  }
+}
+</script>
