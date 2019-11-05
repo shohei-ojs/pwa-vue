@@ -1,5 +1,7 @@
 <template>
+  <!-- base on vuetify default application markup -->
   <v-app id="inspire">
+    <!-- burger menu -->
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -25,9 +27,17 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-Attendance v-if="this.attendance"></v-Attendance>
-    <v-Memo v-if="this.memo"></v-Memo>
+    <!-- main content -->
+    <v-content>
+      <v-container
+        fluid
+      >
+        <v-Attendance v-if="this.attendance"></v-Attendance>
+        <v-Memo v-if="this.memo"></v-Memo>
+      </v-container>
+    </v-content>
 
+    <!-- header -->
     <v-app-bar
       app
       color="cyan"
@@ -49,8 +59,8 @@
 </template>
 
 <script>
-import Attendance from './components/Attendance.vue'
-import Memo from './components/Memo.vue'
+import Attendance from '@/views/Attendance.vue'
+import Memo from '@/views/Memo.vue'
 export default {
   components: {
     'v-Attendance': Attendance,
