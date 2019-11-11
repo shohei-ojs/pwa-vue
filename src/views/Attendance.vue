@@ -6,14 +6,14 @@
     >
       <template v-slot:day="day">
         <v-sheet
-          v-if="day.day % 3 === 0"
+          v-if="true"
         >
-          9:30~<br>18:30
+          {{start}}~<br>{{end}}
         </v-sheet>
       </template>
     </v-calendar>
-    <v-TimePicker label="始まり" value="09:30"></v-TimePicker>
-    <v-TimePicker label="終わり" value="18:30"></v-TimePicker>
+    <v-TimePicker label="始まり" value="09:30" @changeTime='(time)=> this.start = time'></v-TimePicker>
+    <v-TimePicker label="終わり" value="18:30" @changeTime='(time)=> this.end = time'></v-TimePicker>
     <v-btn large>おやすME</v-btn>
     <p>Total:{{sum}}</p>
   </v-sheet>
@@ -28,6 +28,8 @@ export default {
   data () {
     return {
       today: new Date().toISOString().substr(0, 10).toString(),
+      start: '09:30',
+      end: '18:30',
       sum: 0
     }
   }
